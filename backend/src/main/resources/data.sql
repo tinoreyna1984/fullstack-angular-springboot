@@ -1,0 +1,2 @@
+INSERT INTO usuarios (username, password, email, nombre_usuario, apellidos_usuario, rol) values ('admin', '$2a$10$yo7Kk1q39/h8uU.zS/xZQOm6M.0l2qndrdn0p4CRh8vr9KAQ31v3a', 'asistema@mail.com', 'Administrador', 'Sistema', 'ADMINISTRATOR');
+INSERT INTO usuarios (username, password, email, nombre_usuario, apellidos_usuario, rol) values ('tinoreyna1984', '$2a$10$zFxt31.CfbInZKgPpMSxUeJA2ydl14P72dy6.PeMuOD/BI3MZbpTm', 'tinoreyna1984@gmail.com', 'Tino', 'Reyna', 'USER');

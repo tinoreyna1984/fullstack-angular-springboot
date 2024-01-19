@@ -1,0 +1,49 @@
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <h1 class="p-3 mt-5 rounded">{{this.title}}</h1>
+  <form
+    class="border rounded p-4 mt-2 bg-white"
+    (ngSubmit)="onLogin()"
+    [formGroup]="form"
+    autocomplete="off"
+  >
+    <h2>Inicio de sesión</h2>
+    <div class="mb-3">
+      <label for="username" class="form-label">Usuario</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        placeholder="Tu usuario"
+        formControlName="username"
+        [disabled]="loading"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Clave</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Ingresa tu clave"
+        formControlName="password"
+        [disabled]="loading"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="loading">
+      {{ loading ? "Cargando..." : "Ingresar" }}
+    </button>
+    <div class="mb-3">
+      <p>
+        ¿No tienes cuenta?
+        <a class="nav-link" routerLink="/auth/register">¡Ingresa aquí!</a>
+      </p>
+    </div>
+    <div class="mb-3">
+      <p>
+        ¿Olvidaste tu contraseña?
+        <a class="nav-link" routerLink="/auth/forgot-password">¡Ingresa aquí!</a>
+      </p>
+    </div>
+  </form>
+  <app-spinner [loading]="loading"></app-spinner>
+</div>

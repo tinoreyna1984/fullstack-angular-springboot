@@ -1,0 +1,115 @@
+<h1>Administración de usuarios</h1>
+<div class="d-grid d-md-block my-2">
+  <button type="button" class="btn btn-secondary" (click)="onAdd()">
+    Agregar cliente
+  </button>
+  <div class="input-group mt-1">
+    <input
+      type="file"
+      accept=".csv"
+      class="form-control"
+      id="carga-masiva-clientes"
+      aria-describedby="carga-masiva-clientes"
+      aria-label="Upload"
+      (change)="onFileSelected($event)"
+    />
+    <button
+      class="btn btn-secondary"
+      type="button"
+      id="carga-masiva-clientes"
+      (click)="onLoadFile()"
+    >
+      Carga masiva
+    </button>
+  </div>
+</div>
+<div class="row d-flex align-baseline my-2">
+  <div class="mat-elevation-z8 table-responsive">
+    <table mat-table [dataSource]="dataSource" [hidden]="loading">
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let user">
+          {{ dataSource.filteredData.indexOf(user) + 1 }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>Usuario</th>
+        <td mat-cell *matCellDef="let user">
+          {{ user.username }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Correo</th>
+        <td mat-cell *matCellDef="let user">
+          {{ user.email }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Rol</th>
+        <td mat-cell *matCellDef="let user">
+          {{ user.role }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="creationDate">
+        <th mat-header-cell *matHeaderCellDef>Fecha creación</th>
+        <td mat-cell *matCellDef="let user">
+          {{ user.creationDate }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="userCreator">
+        <th mat-header-cell *matHeaderCellDef>Creado por</th>
+        <td mat-cell *matCellDef="let user">
+          {{ user.userCreator }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="approvalDate">
+        <th mat-header-cell *matHeaderCellDef>Aprobado el</th>
+        <td mat-cell *matCellDef="let user">
+          {{ user.approvalDate }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="userStatus">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let user">
+          {{ user.userStatus }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="modificar">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let user">
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="onModify(user)"
+          >
+            Modificar
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="borrar">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let user">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onDelete(user.id)"
+          >
+            Borrar
+          </button>
+        </td>
+      </ng-container>
+    </table>
+
+    <app-spinner [loading]="this.loading"></app-spinner>
+
+    <mat-paginator
+      [disabled]="loading"
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Recorrer páginas"
+    >
+    </mat-paginator>
+  </div>
+</div>

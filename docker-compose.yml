@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  postgresdb:
+    image: postgres
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - POSTGRES_USER=$POSTGRESDB_USER
+      - POSTGRES_PASSWORD=$POSTGRESDB_ROOT_PASSWORD
+      - POSTGRES_DB=$POSTGRESDB_DATABASE
+    ports:
+      - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
+    volumes:
+      - db:/var/lib/postgres
+  app:
+    depends_on:
+      - postgresdb
+    build:
+      context: ./$SPRING_APP
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    env_file: ./.env
+    ports:
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url"  : "$POSTGRES_SERVER:$POSTGRESDB_DOCKER_PORT/$POSTGRESDB_DATABASE",
+        "spring.datasource.username" : "$POSTGRESDB_USER",
+        "spring.datasource.password" : "$POSTGRESDB_ROOT_PASSWORD",
+        "spring.jpa.hibernate.ddl-auto" : "create-drop"
+      }'
+    volumes:
+      - /backend/.m2:/root/.m2
+    stdin_open: true
+    tty: true
+  angular-app:
+    depends_on:
+      - app
+    build:
+      context: ./$ANGULAR_APP
+      dockerfile: ./Dockerfile
+    env_file: ./.env
+    ports:
+      - "$ANGULAR_LOCAL_PORT:$ANGULAR_NGINX_PORT"
+
+volumes:
+  db:

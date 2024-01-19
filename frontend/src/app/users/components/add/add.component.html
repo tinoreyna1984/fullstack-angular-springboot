@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>Agregar usuario</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="add()">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="role" class="form-label">Rol</label>
+      <select id="role" class="form-select" formControlName="role" required>
+        <option selected value="USER">USER</option>
+        <option value="MANAGER">MANAGER</option>
+        <option value="ADMINISTRATOR">ADMINISTRATOR</option>
+      </select>
+    </div>
+    <div mat-dialog-actions class="d-flex gap-2 p-2">
+      <button type="submit" mat-button mat-dialog-close class="btn btn-success">
+        Agregar
+      </button>
+      <button mat-button mat-dialog-close class="btn btn-secondary">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
