@@ -10,6 +10,7 @@
 * Spring Boot Dev Tools
 * PostgreSQL Driver
 * Spring Validation
+* Mail
 * JWT:
 ```xml
 		<!-- JWT -->
@@ -84,7 +85,7 @@
 
 
 ### Ejecución
-* Desde el programa principal AcademiaApplication.java (con IntelliJ IDEA u otro IDE).
+* Desde el programa principal BackendApplication.java (con IntelliJ IDEA u otro IDE).
 * También se puede usar el ejecutable de Maven si aplica.
 * NOTA: después de levantar el proyecto, ejecutar en PostgreSQL los archivos dentro de la carpeta postgresql del repositorio. Son funciones requeridas por el dashboard.
 * Después de levantar el servicio, ejecutar en PostgreSQL los scripts totalActiveUsers.sql y totalLockedUsers.sql (requerido para el dashboard).
